@@ -1,23 +1,25 @@
 <template>
-  <div class="calc">
-    <CalculatorResult @blur="handleBlur" :query="query" />
-    <div class="calc__btns">
-      <div class="calc__numbers">
-        <CalculatorButton
-          @click.self="handleClick"
-          v-for="number in numbers"
-          :key="number"
-          :text="number"
-          height="100"
-        />
-      </div>
-      <div class="calc__actions">
-        <CalculatorButton
-          @click.self="handleClick"
-          v-for="action in actions"
-          :key="action"
-          :text="action"
-        />
+  <div class="body">
+    <div class="calc">
+      <CalculatorResult @blur="handleBlur" :query="query" />
+      <div class="calc__btns">
+        <div class="calc__numbers">
+          <CalculatorButton
+            @click.self="handleClick"
+            v-for="number in numbers"
+            :key="number"
+            :text="number"
+            height="100"
+          />
+        </div>
+        <div class="calc__actions">
+          <CalculatorButton
+            @click.self="handleClick"
+            v-for="action in actions"
+            :key="action"
+            :text="action"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -57,14 +59,21 @@ export default defineComponent({
 
       if (value === 'c') {
         this.query = ''
-      } else if (Object.values(this.actions).includes(lastChar) && Object.values(this.actions).includes(value)) {
+      } else if (
+        Object.values(this.actions).includes(lastChar) &&
+        Object.values(this.actions).includes(value)
+      ) {
         this.query = this.query.slice(0, this.query.length - 1) + value
       } else if (value === '=') {
         if (this.query.length > 2) {
           this.query = Parser.parse(this.query).evaluate() + ''
         }
       } else {
-        console.log(Object.values(this.actions), value, Object.values(this.actions).includes(value))
+        console.log(
+          Object.values(this.actions),
+          value,
+          Object.values(this.actions).includes(value)
+        )
         this.query += value
       }
     }
@@ -73,9 +82,13 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.body {
+  display: flex;
+}
+
 .calc {
   width: 600px;
-  height: 800px;
+  height: 500px;
   margin-left: 50px;
 
   &__btns {
