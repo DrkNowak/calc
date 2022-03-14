@@ -1,14 +1,17 @@
 <template>
   <CalculatorBody />
+  <LoanBody />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import CalculatorBody from './components/CalculatorBody.vue'
+import LoanBody from './components/Loan/LoanBody.vue'
 
 export default defineComponent({
   name: 'App',
   components: {
+    LoanBody,
     CalculatorBody
   }
 })
