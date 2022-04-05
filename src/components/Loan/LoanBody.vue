@@ -33,7 +33,7 @@ export default defineComponent({
   },
 
   methods: {
-    handleChange (value :string, label :string): void {
+    handleChange (value :string, label: keyof LoanData): void {
       this.loanDataStructure[label] = parseFloat(value)
     },
 
@@ -41,13 +41,18 @@ export default defineComponent({
       return calcCredit(this.loanDataStructure) || 0
     },
 
-    handleCredentials (value : string, field : string): void {
-      this.createdUser[field] = value
+    handleCredentials (value : string, field: keyof userCredentials<string>): void {
+      if (field === 'satisfaction') {
+        this.createdUser[field] = parseInt(value) as userCredentials<string>['satisfaction']
+      } else {
+        this.createdUser[field] = value
+      }
     },
 
     handleUserPush (): void {
       this.createdUser = { name: 'Darek', surname: 'Nowak', dateOfBirth: '12-12-1212', adress: 'asdasda 53, 32-467 dasda' }
       this.users.push(this.createdUser)
+      this.$emit('usersUpdate', this.users)
     }
   }
 })
