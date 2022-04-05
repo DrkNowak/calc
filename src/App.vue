@@ -1,12 +1,16 @@
 <template>
   <CalculatorBody />
   <LoanBody @usersUpdate="handleUsersUpdate"/>
+  <button @click="sendUsers">finish</button>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import CalculatorBody from './components/CalculatorBody.vue'
 import LoanBody from './components/Loan/LoanBody.vue'
+
+import { User, Users, SatisfiedUser } from '@/helpers/userData'
+import { userCredentials, satisfiedUserCredentials } from '@/types/global'
 
 export default defineComponent({
   name: 'App',
@@ -15,9 +19,29 @@ export default defineComponent({
     CalculatorBody
   },
 
+  data () {
+    return {
+      usersArr: [] as userCredentials <string> [],
+      usersArrMapped: new Users([])
+    }
+  },
+
   methods: {
-    handleUsersUpdate (arg: any) {
-      console.log(arg)
+    handleUsersUpdate (user : satisfiedUserCredentials<userCredentials<string>>) : void {
+      console.log(user)
+      let createdUser
+      if (Object.keys(user).includes('satisfaction')) {
+        createdUser = new SatisfiedUser(user)
+      } else {
+        const args = Object.values(user) as [string, string, string, string]
+        createdUser = new User(...args)
+      }
+
+      this.usersArrMapped.addUser(createdUser)
+    },
+
+    sendUsers () : void {
+      this.usersArrMapped.sendUsers()
     }
   }
 })

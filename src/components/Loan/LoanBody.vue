@@ -51,8 +51,7 @@ export default defineComponent({
 
     handleUserPush (): void {
       this.createdUser = { name: 'Darek', surname: 'Nowak', dateOfBirth: '12-12-1212', adress: 'asdasda 53, 32-467 dasda' }
-      this.users.push(this.createdUser)
-      this.$emit('usersUpdate', this.users)
+      this.$emit('usersUpdate', this.createdUser)
     }
   }
 })

@@ -1,4 +1,4 @@
-import { userCredentials } from '@/types/global'
+import { userCredentials, satisfiedUserCredentials } from '@/types/global'
 
 export class User implements userCredentials<string> {
     name : string;
@@ -21,7 +21,7 @@ export class User implements userCredentials<string> {
 export class SatisfiedUser extends User implements userCredentials<string> {
   satisfaction : 1|2|3|4|5|6;
 
-  constructor (name: string, surname: string, adress: string, dateOfBirth: string, satisfaction: 1|2|3|4|5|6) {
+  constructor ({ name, surname, adress, dateOfBirth, satisfaction } : satisfiedUserCredentials<userCredentials<string>>) {
     super(name, surname, adress, dateOfBirth)
     this.satisfaction = satisfaction
   }
