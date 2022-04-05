@@ -38,7 +38,7 @@ export class Users {
     this.users.push(user)
   }
 
-  sendUsers (): void {
-    console.log(this.users)
+  sendUsers (): userCredentials<string>[] {
+    return this.users
   }
 }

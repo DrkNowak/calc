@@ -69,11 +69,6 @@ export default defineComponent({
           this.query = Parser.parse(this.query).evaluate() + ''
         }
       } else {
-        console.log(
-          Object.values(this.actions),
-          value,
-          Object.values(this.actions).includes(value)
-        )
         this.query += value
       }
     }

@@ -1,5 +1,5 @@
 <template>
-  <div class="loan-body">
+  <div class="loan-wrapper">
      <LoanInput v-for="{step, key, label} in fields" :key="key" :label="label" :step="step" :field="key" @change="handleChange" />
      <span>your creditworthiness: {{calculateCreditworthiness()}}</span>
      <LoanCredentials @change="handleCredentials"/>
@@ -11,6 +11,7 @@
 
 import { defineComponent } from 'vue'
 import { fields } from '@/consts/loanFields.js'
+import credentialFields from '@/consts/loanCredentialsFields'
 import { LoanData, userCredentials } from '@/types/global'
 import { calcCredit } from '@/helpers/creditWorth'
 
@@ -43,21 +44,31 @@ export default defineComponent({
 
     handleCredentials (value : string, field: keyof userCredentials<string>): void {
       if (field === 'satisfaction') {
-        this.createdUser[field] = parseInt(value) as userCredentials<string>['satisfaction']
+        if (typeof parseInt(value) === 'number') {
+          this.createdUser[field] = parseInt(value) as userCredentials<string>['satisfaction']
+        }
       } else {
         this.createdUser[field] = value
       }
     },
 
     handleUserPush (): void {
-      this.createdUser = { name: 'Darek', surname: 'Nowak', dateOfBirth: '12-12-1212', adress: 'asdasda 53, 32-467 dasda' }
-      this.$emit('usersUpdate', this.createdUser)
+      if (!credentialFields.every(field => Object.keys(this.createdUser).includes(field))) {
+        this.$emit('usersUpdate', { name: 'Darek', surname: 'Nowak', dateOfBirth: '12-12-1212', adress: 'asdasda 53, 32-467 dasda' })
+      } else {
+        this.$emit('usersUpdate', this.createdUser)
+      }
     }
   }
 })
 </script>
 
 <style scoped>
+  .loan-wrapper {
+    width: 900px;
+    border: 2px solid black;
+  }
+
   span {
     width: 200px;
     height: 100px;
