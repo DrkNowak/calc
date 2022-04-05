@@ -1,5 +1,5 @@
 <template>
-  <p>CREDENTIALS</p>
+  <p>loan credentials</p>
   <div v-for="field in loanCredentialsFields" :key="field">
       <span>{{ field }}</span>
       <input ref="input" @change="handleChange($event, field)"/>

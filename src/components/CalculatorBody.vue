@@ -31,7 +31,7 @@ import CalculatorButton from './CalculatorButton.vue'
 import CalculatorResult from './CalculatorResult.vue'
 import { Parser } from 'expr-eval'
 
-import { numbers, actions } from './../consts/buttons'
+import { numbers, actions } from '../consts/buttons'
 
 type Event = {
   target: { value: string };

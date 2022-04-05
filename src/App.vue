@@ -1,6 +1,6 @@
 <template>
   <CalculatorBody />
-  <LoanBody />
+  <LoanBody @usersUpdate="handleUsersUpdate"/>
 </template>
 
 <script lang="ts">
@@ -13,6 +13,12 @@ export default defineComponent({
   components: {
     LoanBody,
     CalculatorBody
+  },
+
+  methods: {
+    handleUsersUpdate (arg: any) {
+      console.log(arg)
+    }
   }
 })
 </script>

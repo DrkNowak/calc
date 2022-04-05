@@ -1,1 +1,1 @@
-export default ['name', 'surname', 'dateOfBirth', 'adress', 'satisfy']
+export default ['name', 'surname', 'dateOfBirth', 'adress', 'satisfaction']
