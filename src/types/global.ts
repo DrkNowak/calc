@@ -21,9 +21,14 @@ interface userCredentials<T> {
     satisfaction?: 1|2|3|4|5|6,
 }
 
+type satisfiedUserCredentials<T> = {
+  readonly [P in keyof T]-?: T[P]
+}
+
 export {
   InputRef,
   LoanData,
   loanUserFields,
-  userCredentials
+  userCredentials,
+  satisfiedUserCredentials
 }
