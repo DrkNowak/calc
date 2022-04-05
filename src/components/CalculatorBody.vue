@@ -46,7 +46,7 @@ export default defineComponent({
     return {
       numbers,
       actions,
-      query: ''
+      query: '' as string
     }
   },
   methods: {
